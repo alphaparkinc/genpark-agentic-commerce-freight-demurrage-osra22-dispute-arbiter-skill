@@ -1,0 +1,85 @@
+{
+  "name": "genpark-agentic-commerce-freight-demurrage-osra22-dispute-arbiter-skill",
+  "version": "1.0.0",
+  "title": "FMC OSRA-22 Ocean Freight Demurrage Dispute Arbiter Skill",
+  "description": "Ocean Shipping Reform Act (OSRA-22) demurrage billing compliance, 46 U.S.C. \u00a7 41104 mandatory billing elements audit, and improper detention dispute drafting. Built for GenPark (https://www.genpark.ai).",
+  "homepage": "https://www.genpark.ai",
+  "linkedin": "https://www.linkedin.com/company/92955550",
+  "category": "agentic-commerce",
+  "topics": [
+    "demurrage",
+    "osra-22",
+    "fmc-disputes",
+    "ocean-shipping",
+    "agentic-commerce",
+    "model-context-protocol",
+    "genpark"
+  ],
+  "tools": [
+    {
+      "name": "audit_demurrage_invoice_osra_compliance",
+      "description": "Verify carrier invoice against 13 mandatory OSRA-22 statutory billing data elements.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "invoice_metadata": {
+            "type": "object",
+            "properties": {
+              "has_container_num": {
+                "type": "boolean"
+              },
+              "has_port_discharge_date": {
+                "type": "boolean"
+              },
+              "has_free_time_start_end": {
+                "type": "boolean"
+              },
+              "has_cert_allowed_empty_return": {
+                "type": "boolean"
+              },
+              "has_carrier_fmc_num": {
+                "type": "boolean"
+              }
+            }
+          },
+          "billed_demurrage_usd": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "invoice_metadata",
+          "billed_demurrage_usd"
+        ]
+      }
+    },
+    {
+      "name": "generate_fmc_charge_complaint_packet",
+      "description": "Generate formal FMC 46 U.S.C. \u00a7 41104(a) charge dispute complaint packet for immediate carrier fee cancellation.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "carrier_name": {
+            "type": "string"
+          },
+          "bol_number": {
+            "type": "string"
+          },
+          "missing_elements": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "disputed_amount_usd": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "carrier_name",
+          "bol_number",
+          "disputed_amount_usd"
+        ]
+      }
+    }
+  ]
+}
